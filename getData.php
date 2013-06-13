@@ -1,9 +1,9 @@
 <?
-
+header('Content-type: application/json');
 $dbh = new PDO('mysql:host=localhost;dbname=eve', 'eve', 'eve');
 
 
-$sql="select * from  balance order by id desc";
+$sql="select * from balance order by id desc";
 $stmt = $dbh->prepare($sql);
 $stmt->execute();
 echo '{"cols":[{"id":"","label":"Date","type":"datetime"},{"id":"","label":"Value","type":"number"}],"rows":[';
