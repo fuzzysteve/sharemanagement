@@ -43,7 +43,7 @@
 
 $dbh = new PDO('mysql:host=localhost;dbname=eve', 'eve', 'eve');
 # current shareholders only
-$sql="select name,eveid,shares,lastupdate from shareholders where lastupdate=(select max(lastupdate) from  evesupport.shareholders)";
+$sql="select name,eveid,shares,lastupdate,type from shareholders where lastupdate=(select max(lastupdate) from  evesupport.shareholders)";
 
 #all shareholders in the last 5 months, along with the time they were last a shareholder, with the shares they held at that time.
 #$sql="select name,eveid,shares,max(lastupdate) from shareholders where lastupdate>date_sub(now(),INTERVAL 5 MONTH) group by name,eveid,shares";
@@ -53,7 +53,13 @@ $stmt = $dbh->prepare($sql);
 
 $stmt->execute();
 while ($row = $stmt->fetchObject()){
-echo "<tr><td>".$row->name."</td><td>".$row->shares."</td><td>".$row->lastupdate."</td></tr>";
+$shareholdertype=1377;
+if ($row->type)
+{
+$shareholdertype=2;
+
+}
+echo "<tr><td onclick='CCPEVE.showInfo(".$shareholdertype.",".$row->eveid.")'>".$row->name."</td><td>".$row->shares."</td><td>".$row->lastupdate."</td></tr>";
 }
 
 
