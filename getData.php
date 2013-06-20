@@ -17,7 +17,7 @@ echo ",";
 }
 $x=2;
 $date=localtime(strtotime($row->pointtime));
-$jsonformatdate="Date( ".($date[5]+1900).", ".($date[4]+1).", ".($date[3]+1).", ".($date[2]).", 0 , 0)";
+$jsonformatdate="Date( ".($date[5]+1900).", ".($date[4]+1).", ".($date[3]).", ".($date[2]).", 0 , 0)";
 echo '{"c":[{"v":"'.$jsonformatdate.'"},{"v":'.$row->balance/$row->shares."}]}";
 }
 echo "]}";
